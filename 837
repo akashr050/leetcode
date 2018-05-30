@@ -1,0 +1,32 @@
+# https://leetcode.com/problems/most-common-word/description/
+
+class Solution {
+public:
+    string mostCommonWord(string paragraph, vector<string>& banned) {
+        unordered_map<string, int> val_to_vocab;
+        
+        sort(banned.begin(), banned.end());
+        for(int i=0; i<paragraph.length(); ++i){
+            paragraph[i] = tolower(paragraph[i]);
+        }
+        
+        for (int i=0; i<paragraph.length(); ++i){
+            string token = "";
+            while((paragraph[i] != '!') && (paragraph[i] != '?') && (paragraph[i] != '\'') && (paragraph[i] != ';') && (paragraph[i] != '.') && (paragraph[i] != ',') && (paragraph[i] != '\0')){
+                if(paragraph[i]==' ')
+                    break;
+                token += paragraph[i];  
+                ++i;
+            }
+            if ((not binary_search(banned.begin(), banned.end(), token)) && token != "")
+                val_to_vocab[token]++;
+        }
+        pair<string, int> max_pair=make_pair("", 0);
+        
+        for(auto &elem: val_to_vocab){
+            if(elem.second > max_pair.second)
+                max_pair = elem;
+        }
+        return max_pair.first;
+    }
+};
