@@ -1,0 +1,14 @@
+# https://leetcode.com/problems/third-maximum-number/description/
+
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        set<int> num_set;
+        for(auto elem: nums){
+            num_set.insert(elem);
+            if(num_set.size() > 3) 
+                num_set.erase(num_set.begin());
+        }
+        return (num_set.size() >=3) ? *(num_set.begin()): *(num_set.rbegin());
+    }
+};
