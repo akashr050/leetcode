@@ -1,0 +1,41 @@
+# https://leetcode.com/problems/third-maximum-number/description/
+
+class Solution {
+private: 
+    int max1=INT_MIN, max2=INT_MIN, max3=INT_MIN;
+    int count=0, min_count=0;
+public:
+    void swapMaxValue(int num, int pos){
+        if(pos==3)
+            max3 = num;
+        if(pos==2){
+            max3 = max2;
+            max2 = num;
+        }
+        if(pos==1){
+            max3 = max2;
+            max2 = max1;
+            max1 = num;
+        }
+        count++;
+    }
+    int thirdMax(vector<int>& nums) {
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] > max1)
+                swapMaxValue(nums[i], 1);
+            else if(nums[i] < max1 && nums[i] > max2)
+                swapMaxValue(nums[i], 2);
+            else if(nums[i] < max2 && nums[i] > max3)
+                swapMaxValue(nums[i], 3);
+            if(nums[i]==INT_MIN)
+                min_count =1;
+            
+        }
+        if(count + min_count<3)
+            return max1;
+        return max3;
+        
+        
+        
+    }
+};
