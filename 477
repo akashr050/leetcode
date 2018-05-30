@@ -1,0 +1,19 @@
+# https://leetcode.com/problems/total-hamming-distance/description/
+
+class Solution {
+public:
+    int totalHammingDistance(vector<int>& nums) {
+        int ham_dist = 0;
+        vector<int> ones(31);
+        
+        for(int i=0; i<nums.size(); ++i){
+            for(int j=0; (1 <<j) <= nums[i]; ++j){
+                if((1<<j) & nums[i])
+                    ones[j]++;
+            }
+        }
+        for(int i=0; i<ones.size(); ++i)
+            ham_dist += ones[i] * (nums.size() - ones[i]);
+        return ham_dist;
+     }
+};
