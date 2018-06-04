@@ -1,0 +1,30 @@
+# https://leetcode.com/problems/arithmetic-slices/description/
+
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int size = A.size();
+        vector<int> count;
+        if(size < 3)
+            return 0;
+        int diff = A[1] - A[0];
+        int temp_count = 2;
+        for(int i=1; i<size-1; ++i){
+            int temp_diff = A[i+1] - A[i];
+            if(temp_diff != diff){
+                diff = temp_diff;
+                if(temp_count > 2)
+                    count.push_back(temp_count);
+                temp_count = 2;
+            }
+            else
+                ++temp_count;
+        }
+        if(temp_count > 2)
+            count.push_back(temp_count);
+        int num_seq = 0;
+        for(int i=0; i<count.size();++i)
+            num_seq += (count[i] - 1) * (count[i] - 2)/2;
+        return num_seq;
+    }
+};
