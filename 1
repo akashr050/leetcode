@@ -1,0 +1,16 @@
+# https://leetcode.com/problems/two-sum/description/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> nums_map;
+        for(int i=0; i<nums.size(); ++i){
+            cout<<target<<" "<<target-nums[i]<<endl;
+            if(nums_map.find(target - nums[i]) != nums_map.end()){
+                vector<int> output = {nums_map[target - nums[i]], i};
+                return output;
+            }
+            nums_map[nums[i]] = i;
+        }
+    }
+};
