@@ -1,0 +1,12 @@
+# https://leetcode.com/problems/reverse-string/description/
+
+class Solution {
+public:
+    string reverseString(string s) {
+        string outStr;
+        outStr.reserve(s.size());
+        for(int i=s.size() -1; i >= 0; --i)
+            outStr += s[i];
+        return outStr;
+    }
+};
